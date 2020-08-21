@@ -10,6 +10,8 @@ exports.up = function(knex) {
         table.string("score").notNullable()
         table.string("url").notNullable()
 
+        table.integer('user_id').references('users.id').notNullable()
+
     })
 };
 

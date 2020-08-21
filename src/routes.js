@@ -1,19 +1,24 @@
 const express = require('express');
 const routes = express.Router();
 
-const controllerGet = require('./controllers/getController.js')
-const controllerPost = require('./controllers/postController.js')
-const controllerDel = require('./controllers/deleteController.js')
+const usersController = require('./controllers/users/usersController.js')
+const favoritesController = require('./controllers/favorites/favoritesController.js')
 
-routes.get("/animes", controllerGet.indexAnimes)
-routes.get("/series", controllerGet.indexSeries)
-routes.get("/anime", controllerGet.selectAnime)
-routes.get("/serie", controllerGet.selectSerie)
+const authMiddlewares = require('./middlewares/auth.js')
 
-routes.post("/create-animes", controllerPost.createAnime)
-routes.post("/create-series", controllerPost.createSerie)
 
-routes.delete("/del-animes", controllerDel.deleteAnime)
-routes.delete("/del-series", controllerDel.deleteSerie)
+routes.post("/register", usersController.registerUser)
+routes.post("/auth", usersController.authentication)
+
+routes.get("/animes", favoritesController.indexAnimes)
+routes.get("/series", favoritesController.indexSeries)
+routes.get("/anime", favoritesController.selectAnime)
+routes.get("/serie", favoritesController.selectSerie)
+
+routes.post("/create-animes", favoritesController.createAnime)
+routes.post("/create-series", favoritesController.createSerie)
+
+routes.delete("/del-animes", favoritesController.deleteAnime)
+routes.delete("/del-series", favoritesController.deleteSerie)
 
 module.exports = routes;

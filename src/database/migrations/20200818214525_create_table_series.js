@@ -5,6 +5,8 @@ exports.up = function(knex) {
         table.string("id").notNullable()
         table.string("name").notNullable()
         table.string("image_thumbnail_path").notNullable()
+
+        table.integer('user_id').references('users.id').notNullable()
     })
 };
 
